@@ -1,0 +1,37 @@
+{
+  "name": "cytoscape-random-preset-layout",
+  "version": "0.1.0",
+  "main": [
+    "dist/cytoscape-random-preset-layout.js"
+  ],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iisg/cytoscape-random-preset-layout"
+  },
+  "moduleType": [
+    "globals"
+  ],
+  "description": "Random layout for Cytoscape.js nodes",
+  "license": "MIT",
+  "dependencies": {
+    "cytoscape": ">= 2.2"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "coffeelint.json",
+    "Gulpfile.coffee",
+    "Gulpfile.js",
+    "package.json"
+  ],
+  "keywords": [
+    "agh",
+    "layout",
+    "random",
+    "cytoscape",
+    "cytoscape.js",
+    "extension"
+  ]
+}
