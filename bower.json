@@ -15,7 +15,8 @@
   "description": "Random layout for Cytoscape.js nodes",
   "license": "MIT",
   "dependencies": {
-    "cytoscape": ">= 2.2"
+    "cytoscape": ">= 2.6.11",
+    "jquery": ">= 2.2.3"
   },
   "ignore": [
     "**/.*",

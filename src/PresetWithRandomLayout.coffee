@@ -1,4 +1,4 @@
-(($$) ->
+(($$, $) ->
   class PresetWithRandomLayout
     defaults:
       positions: undefined # map of (node id) => (position obj); or function(node){ return somPos; }
@@ -11,17 +11,38 @@
       ready: undefined # callback on layoutready
       stop: undefined # callback on layoutstop
 
+    makeBoundingBox: (bb) ->
+      if bb.x1 != null && bb.y1 != null
+        if bb.x2 != null && bb.y2 != null && bb.x2 >= bb.x1 && bb.y2 >= bb.y1
+          return {
+            x1: bb.x1
+            y1: bb.y1
+            x2: bb.x2
+            y2: bb.y2
+            w: bb.x2 - bb.x1
+            h: bb.y2 - bb.y1
+          }
+        else if bb.w != null && bb.h != null && bb.w >= 0 && bb.h >= 0
+          return {
+            x1: bb.x1
+            y1: bb.y1
+            x2: bb.x1 + bb.w
+            y2: bb.y1 + bb.h
+            w: bb.w
+            h: bb.h
+          }
+
     constructor: (options) ->
-      @options = $$.util.extend(true, {}, @defaults, options)
+      @options = $.extend(true, {}, @defaults, options)
 
     run: ->
       options = @options
       cy = @options.cy
       eles = @options.eles
       nodes = eles.nodes()
-      posIsFn = $$.is.fn(options.positions)
+      posIsFn = $.isFunction(options.positions)
 
-      getPosition = (node) ->
+      getPosition = (node) =>
         if node.data('hasPosition')
           return null
 
@@ -45,14 +66,14 @@
               y1: 0
               w: cy.width()
               h: cy.height()
-          bb = $$.util.makeBoundingBox(box)
+          bb = @makeBoundingBox(box)
 
           return {
           x: bb.x1 + Math.round(Math.random() * bb.w),
           y: bb.y1 + Math.round(Math.random() * bb.h)
           }
 
-        return pos;
+        return pos
 
       nodes.layoutPositions(@, options, (i, node) ->
         position = getPosition(node)
@@ -60,7 +81,7 @@
         if position == null
           return false
 
-        return position;
+        return position
       )
 
       return @ # chaining
@@ -70,4 +91,4 @@
     'presetWithRandom',
     PresetWithRandomLayout
   )
-)(cytoscape)
+)(cytoscape, jQuery)

@@ -4,7 +4,8 @@
 Random layout for Cytoscape.js nodes
 
 ## Dependencies
- * Cytoscape.js >= 2.2
+ * Cytoscape.js >= 2.6.11
+ * jQuery >= 2.2.3
  
 ## Installation
 Require package using bower:
